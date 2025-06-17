@@ -63,8 +63,8 @@ changelog:
 
 release:
   github:
-    owner: pscarrone
-    name: dummy_http_passkeys
+    owner: developmeh
+    name: mock-cors-server
   draft: false
   prerelease: auto
   name_template: "{{.ProjectName}} v{{.Version}}"
