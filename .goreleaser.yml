@@ -1,5 +1,5 @@
 # GoReleaser configuration for Dummy HTTP Passkeys Server
-project_name: dummy-http-passkeys
+project_name: mock-cors-server
 
 before:
   hooks:
