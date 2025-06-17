@@ -47,22 +47,22 @@ jobs:
         file: ./coverage.out
 
     - name: Build
-      run: go build -v ./cmd/server
+      run: go build -o mock_cors_server ./cmd/server
+
+    - name: Install test dependencies
+      run: sudo apt-get update && sudo apt-get install -y jq
+
+    - name: Make test script executable
+      run: chmod +x test_e2e.sh
 
     - name: Run end-to-end tests
       run: |
-        # Start server in background
-        ./mock_cors_server &
-        SERVER_PID=$!
+        # Build binary in correct location for test script
+        mkdir -p bin
+        go build -o bin/mock_cors_server ./cmd/server
 
-        # Wait for server to start
-        sleep 2
-
-        # Run tests
-        go run test.go
-
-        # Clean up
-        kill $SERVER_PID || true
+        # Run the proper E2E test script
+        ./test_e2e.sh
 
   build:
     runs-on: ubuntu-latest
