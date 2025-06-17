@@ -39,7 +39,7 @@ archives:
     files:
       - README.md
       - LICENSE*
-      - config.yaml
+      - config.yaml.sample
 
 checksum:
   name_template: 'checksums.txt'
@@ -84,7 +84,7 @@ release:
     - Environment variables: `MOCK_CORS_PORT=8080`
     - Configuration file: `config.yaml`
 
-    See the included `config.yaml` for configuration examples.
+    See the included `config.yaml.sample` for configuration examples.
 
 brews:
   - name: dummy-http-mock-cors
@@ -97,6 +97,6 @@ brews:
     folder: Formula
     install: |
       bin.install "mock-cors-server"
-      etc.install "config.yaml" => "dummy-http-mock-cors/config.yaml"
+      etc.install "config.yaml.sample" => "dummy-http-mock-cors/config.yaml"
     test: |
       system "#{bin}/mock-cors-server", "--help"
