@@ -1,0 +1,10 @@
+This is a plain text file served by the dummy HTTP mock CORS server.
+
+It demonstrates the static file serving capability.
+
+Features:
+- Static file serving
+- JSON blob responses
+- Dummy hardcoded responses
+- Configurable CORS settings
+- Multiple content types support

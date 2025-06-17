@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Static File</title>
+</head>
+<body>
+    <h1>Hello from Static File!</h1>
+    <p>This is an example HTML file served by the dummy HTTP mock CORS server.</p>
+    <p>Current time: <span id="time"></span></p>
+    <script>
+        document.getElementById('time').textContent = new Date().toISOString();
+    </script>
+</body>
+</html>

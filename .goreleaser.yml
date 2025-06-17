@@ -1,0 +1,102 @@
+# GoReleaser configuration for Dummy HTTP Passkeys Server
+project_name: dummy-http-passkeys
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - main: ./cmd/server
+    binary: mock-cors-server
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE*
+      - config.yaml
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^chore:'
+      - '^style:'
+      - '^refactor:'
+      - Merge pull request
+      - Merge branch
+      - go mod tidy
+
+release:
+  github:
+    owner: pscarrone
+    name: dummy_http_passkeys
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}} v{{.Version}}"
+  header: |
+    ## Dummy HTTP Mock CORS Server v{{.Version}}
+
+    This release includes the following changes:
+  footer: |
+    ## Installation
+
+    Download the appropriate binary for your platform from the assets below.
+
+    ### Configuration
+
+    The server can be configured using:
+    - Command line flags: `--port 8080`
+    - Environment variables: `MOCK_CORS_PORT=8080`
+    - Configuration file: `config.yaml`
+
+    See the included `config.yaml` for configuration examples.
+
+brews:
+  - name: dummy-http-mock-cors
+    homepage: https://github.com/pscarrone/dummy_http_passkeys
+    description: "A dummy HTTP mock CORS server for testing and development"
+    license: "MIT"
+    repository:
+      owner: pscarrone
+      name: homebrew-tap
+    folder: Formula
+    install: |
+      bin.install "mock-cors-server"
+      etc.install "config.yaml" => "dummy-http-mock-cors/config.yaml"
+    test: |
+      system "#{bin}/mock-cors-server", "--help"

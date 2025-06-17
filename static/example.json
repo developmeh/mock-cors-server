@@ -1,0 +1,9 @@
+{
+  "message": "Hello from static JSON file!",
+  "status": "success",
+  "data": {
+    "type": "static_file",
+    "timestamp": "2024-01-01T00:00:00Z",
+    "features": ["static_files", "json_blobs", "dummy_responses"]
+  }
+}
