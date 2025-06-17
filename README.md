@@ -2,6 +2,10 @@
 
 A configurable HTTP server written in Go that handles mock CORS requests. This server is designed for testing and development purposes, providing configurable routes, CORS settings, and dummy responses.
 
+## 📖 User Guide
+
+**👉 [Complete User Guide with Examples](USER_GUIDE.md)** - Comprehensive guide with examples for various scenarios, configuration methods, and troubleshooting tips.
+
 ## Features
 
 - **Configurable Routes**: Support for multiple routes with individual settings
