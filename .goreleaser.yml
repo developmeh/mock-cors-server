@@ -86,17 +86,3 @@ release:
 
     See the included `config.yaml.sample` for configuration examples.
 
-brews:
-  - name: dummy-http-mock-cors
-    homepage: https://github.com/pscarrone/dummy_http_passkeys
-    description: "A dummy HTTP mock CORS server for testing and development"
-    license: "MIT"
-    repository:
-      owner: pscarrone
-      name: homebrew-tap
-    folder: Formula
-    install: |
-      bin.install "mock-cors-server"
-      etc.install "config.yaml.sample" => "dummy-http-mock-cors/config.yaml"
-    test: |
-      system "#{bin}/mock-cors-server", "--help"
